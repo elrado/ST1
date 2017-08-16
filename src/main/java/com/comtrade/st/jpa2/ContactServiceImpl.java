@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
  *
  * @author radoo
  */
-@Service("jpaContactService")
+@Service("ContactService")
 @Repository
 @Transactional
 public class ContactServiceImpl implements ContactService{
@@ -37,7 +37,8 @@ public class ContactServiceImpl implements ContactService{
 
 	@Override
 	public List<Contact> findAllWithDetail() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		List<Contact> contacts = em.createNamedQuery("Contact.findAllWithDetail", Contact.class).getResultList();
+		return contacts;
 	}
 
 	@Override

@@ -23,7 +23,7 @@ public class Run {
 		ApplicationContext ctx
 			= new AnnotationConfigApplicationContext(Config.class);
 				//List all contacts
-		ContactService jpaContactService = (ContactService) ctx.getBean("jpaContactService", ContactService.class);
+		ContactService jpaContactService = (ContactService) ctx.getBean("ContactService", ContactService.class);
 		List<Contact> contacts = jpaContactService.findAll();
 		Set<ContactTelDetail> contactTelDetails;
 
@@ -31,6 +31,25 @@ public class Run {
 		for (Contact c : contacts) {
 			System.out.println("Listing all contacts with details");
 			System.out.println(c);
+		}
+		System.out.println("****************************contacts with details********************************************");
+		contacts = jpaContactService.findAllWithDetail();
+		//List all contacts with details
+		for (Contact c : contacts) {
+			System.out.println("Listing all contacts with details");
+			System.out.println(c);
+			contactTelDetails = c.getContactTelDetails();
+			if (contactTelDetails != null) {
+				for (ContactTelDetail cd : contactTelDetails) {
+					System.out.print("	");
+					System.out.println(cd);
+				}//end for
+				if (c.getHobbies() != null) {
+					for (Hobby hobby : c.getHobbies()) {
+						System.out.println(hobby);
+					}
+				}
+			}//end if
 		}
 	}//end main
 }//end Run
