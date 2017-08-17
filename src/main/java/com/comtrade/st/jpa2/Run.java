@@ -5,6 +5,7 @@
  */
 package com.comtrade.st.jpa2;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import org.apache.log4j.Logger;
@@ -25,6 +26,7 @@ public class Run {
 				//List all contacts
 		ContactService jpaContactService = (ContactService) ctx.getBean("ContactService", ContactService.class);
 		ContactSummaryUntypeImpl jpaContactSummaryUntypeImpl = (ContactSummaryUntypeImpl) ctx.getBean("jpaContactSummaryUntypeImpl", ContactSummaryUntypeImpl.class);
+		ContactSummaryService jpaContactSummaryService = (ContactSummaryService) ctx.getBean("ContactSummaryService", ContactSummaryService.class);
 		List<Contact> contacts = jpaContactService.findAll();
 		Set<ContactTelDetail> contactTelDetails;
 
@@ -57,7 +59,30 @@ public class Run {
 		System.out.println("Listing contact with id 4");
 		System.out.println(contact);
 
-		System.out.println("****************************ContactSummaryUntypeImpl displayAllContactsSummary********************************************");
+		System.out.println("****************************Untyped result*******************************************");
 		jpaContactSummaryUntypeImpl.displayAllContactsSummary();
+
+		System.out.println("****************************ContactSummaryService findAll (TYPED RESULT)********************************************");
+		jpaContactSummaryUntypeImpl.displayAllContactsSummary();
+
+		System.out.println("****************************Insert Contact********************************************");
+		contact = new Contact();
+		contact.setFirstName("Ime");
+		contact.setLastName("Priimek");
+		contact.setBirthDate(new Date());
+		jpaContactService.save(contact);
+		Long id = contact.getId();
+		contact = jpaContactService.findById(id);
+		System.out.println("Listing contact with id " + id);
+		System.out.println(contact);
+		contact.setBirthDate(new Date(1980, 7, 1));
+		jpaContactService.save(contact);
+		contact = jpaContactService.findById(id);
+		System.out.println("Listing contact with id " + id);
+		System.out.println(contact);
+		System.out.println(contacts.size());
+		jpaContactService.delete(contact);
+		System.out.println(contacts.size());
+		
 	}//end main
 }//end Run

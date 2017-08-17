@@ -51,12 +51,17 @@ public class ContactServiceImpl implements ContactService{
 
 	@Override
 	public Contact save(Contact contact) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		if (contact.getId() == null){
+			em.persist(contact);
+		} else {
+			em.merge(contact);
+		}
+		return contact;
 	}
 
 	@Override
 	public void delete(Contact contact) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		em.remove(em.contains(contact) ? contact : em.merge(contact));
 	}
 
 }//end ContactServiceImpl
