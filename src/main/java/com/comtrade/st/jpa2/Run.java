@@ -24,6 +24,7 @@ public class Run {
 			= new AnnotationConfigApplicationContext(Config.class);
 				//List all contacts
 		ContactService jpaContactService = (ContactService) ctx.getBean("ContactService", ContactService.class);
+		ContactSummaryUntypeImpl jpaContactSummaryUntypeImpl = (ContactSummaryUntypeImpl) ctx.getBean("jpaContactSummaryUntypeImpl", ContactSummaryUntypeImpl.class);
 		List<Contact> contacts = jpaContactService.findAll();
 		Set<ContactTelDetail> contactTelDetails;
 
@@ -51,5 +52,12 @@ public class Run {
 				}
 			}//end if
 		}
+		System.out.println("****************************contacts findById********************************************");
+		Contact contact = jpaContactService.findById(4L);
+		System.out.println("Listing contact with id 4");
+		System.out.println(contact);
+
+		System.out.println("****************************ContactSummaryUntypeImpl displayAllContactsSummary********************************************");
+		jpaContactSummaryUntypeImpl.displayAllContactsSummary();
 	}//end main
 }//end Run

@@ -9,6 +9,7 @@ package com.comtrade.st.jpa2;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import org.springframework.transaction.annotation.Transactional;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -43,7 +44,9 @@ public class ContactServiceImpl implements ContactService{
 
 	@Override
 	public Contact findById(Long id) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		TypedQuery<Contact> query = em.createNamedQuery("Contact.findById", Contact.class);
+		query.setParameter("id", id);
+		return query.getSingleResult();
 	}
 
 	@Override
