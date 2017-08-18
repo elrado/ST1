@@ -22,4 +22,6 @@ public interface ContactService {
 	Contact save(Contact contact);
 
 	void delete(Contact contact);
+
+	List<Contact> findAllByNativeQuery();
 }//end ContactService

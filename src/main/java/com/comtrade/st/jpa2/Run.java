@@ -83,6 +83,13 @@ public class Run {
 		System.out.println(contacts.size());
 		jpaContactService.delete(contact);
 		System.out.println(contacts.size());
+
+		System.out.println("****************************ContactSummaryService findAllByNativeQuery ********************************************");
+		contacts = jpaContactService.findAllByNativeQuery();
+		for (Contact c : contacts) {
+			System.out.println("Listing all contacts from nativeQ");
+			System.out.println(c);
+		}
 		
 	}//end main
 }//end Run

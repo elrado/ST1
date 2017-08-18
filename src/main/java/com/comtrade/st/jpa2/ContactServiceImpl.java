@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.comtrade.st.jpa2;
 
 import java.util.List;
@@ -23,13 +22,16 @@ import org.springframework.stereotype.Service;
 @Service("ContactService")
 @Repository
 @Transactional
-public class ContactServiceImpl implements ContactService{
-	private Log log =LogFactory.getLog(ContactServiceImpl.class);
+public class ContactServiceImpl implements ContactService {
+
+	private Log log = LogFactory.getLog(ContactServiceImpl.class);
+	final static String ALL_CONTACT_NATIVE_QUERY
+		= "select id, first_name, last_name, birth_date, version from contact";
 
 	@PersistenceContext(unitName = "st")
 	EntityManager em;
-	
-	@Transactional(readOnly=true)
+
+	@Transactional(readOnly = true)
 	@Override
 	public List<Contact> findAll() {
 		List<Contact> contacts = em.createNamedQuery("Contact.findAll", Contact.class).getResultList();
@@ -51,7 +53,7 @@ public class ContactServiceImpl implements ContactService{
 
 	@Override
 	public Contact save(Contact contact) {
-		if (contact.getId() == null){
+		if (contact.getId() == null) {
 			em.persist(contact);
 		} else {
 			em.merge(contact);
@@ -62,6 +64,11 @@ public class ContactServiceImpl implements ContactService{
 	@Override
 	public void delete(Contact contact) {
 		em.remove(em.contains(contact) ? contact : em.merge(contact));
+	}
+
+	@Override
+	public List<Contact> findAllByNativeQuery() {
+		return em.createNativeQuery(ALL_CONTACT_NATIVE_QUERY, Contact.class).getResultList();
 	}
 
 }//end ContactServiceImpl
