@@ -91,5 +91,11 @@ public class Run {
 			System.out.println(c);
 		}
 		
+		System.out.println("****************************ContactSummaryService findAllByNativeQueryRsMapper ********************************************");
+		contacts = jpaContactService.findAllByNativeQueryRsMapper();
+		for (Contact c : contacts) {
+			System.out.println("Listing all contacts from nativeQ Rs Mapper");
+			System.out.println(c);
+		}
 	}//end main
 }//end Run

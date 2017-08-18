@@ -16,12 +16,15 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Column;
+import javax.persistence.ConstructorResult;
+import javax.persistence.EntityResult;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Version;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -47,6 +50,10 @@ import javax.persistence.TemporalType;
 "c.hobbies h where c.id = :id"
 	)
 })
+@SqlResultSetMapping(
+	name = "contactResult"
+	,entities = @EntityResult(entityClass = Contact.class)
+)
 public class Contact implements Serializable {
 
 	private Long id;

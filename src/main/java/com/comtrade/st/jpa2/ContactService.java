@@ -24,4 +24,6 @@ public interface ContactService {
 	void delete(Contact contact);
 
 	List<Contact> findAllByNativeQuery();
+
+	List<Contact> findAllByNativeQueryRsMapper();
 }//end ContactService
