@@ -26,7 +26,6 @@ public class Run {
 				//List all contacts
 		ContactService jpaContactService = (ContactService) ctx.getBean("ContactService", ContactService.class);
 		ContactSummaryUntypeImpl jpaContactSummaryUntypeImpl = (ContactSummaryUntypeImpl) ctx.getBean("jpaContactSummaryUntypeImpl", ContactSummaryUntypeImpl.class);
-		ContactSummaryService jpaContactSummaryService = (ContactSummaryService) ctx.getBean("ContactSummaryService", ContactSummaryService.class);
 		List<Contact> contacts = jpaContactService.findAll();
 		Set<ContactTelDetail> contactTelDetails;
 
@@ -95,6 +94,12 @@ public class Run {
 		contacts = jpaContactService.findAllByNativeQueryRsMapper();
 		for (Contact c : contacts) {
 			System.out.println("Listing all contacts from nativeQ Rs Mapper");
+			System.out.println(c);
+		}
+
+		System.out.println("****************************ContactSummaryService findByCriteriaQuery ********************************************");
+		contacts = jpaContactService.findByCriteriaQuery("Rado", null);
+		for (Contact c : contacts) {
 			System.out.println(c);
 		}
 	}//end main

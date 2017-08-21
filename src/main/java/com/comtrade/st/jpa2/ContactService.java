@@ -26,4 +26,6 @@ public interface ContactService {
 	List<Contact> findAllByNativeQuery();
 
 	List<Contact> findAllByNativeQueryRsMapper();
+
+	List<Contact> findByCriteriaQuery(String firstName, String lastName);
 }//end ContactService
