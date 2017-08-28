@@ -42,5 +42,9 @@ public class Run {
 			System.out.println(c);
 		}
 
+		contacts = springJpaContactService.FindByLastName("Osre");
+		for (Contact c : contacts) {
+			System.out.println(c);
+		}
 	}//end main
 }//end Run

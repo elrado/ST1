@@ -41,4 +41,9 @@ public class ContactServiceDataImpl implements ContactServiceData {
 		return contactRepository.findByFirstNameAndLastName(
 			firstName, lastName);
 	}
+
+	@Transactional(readOnly = true)
+	public List<Contact>FindByLastName(String lastName){
+		return contactRepository.FindByLastName(lastName);
+	}
 }//end ContactServiceDataImpl

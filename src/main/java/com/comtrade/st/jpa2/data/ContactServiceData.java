@@ -19,4 +19,5 @@ public interface ContactServiceData {
 	List<Contact> findByFirstName(String firstName);
 
 	List<Contact> findByFirstNameAndLastName(String firstName, String lastName);
+	List<Contact>FindByLastName(String lastName);
 }//end ContactServiceData
